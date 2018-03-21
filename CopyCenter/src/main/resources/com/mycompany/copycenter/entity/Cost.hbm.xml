@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 21.03.2018 14:53:47 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mycompany.copycenter.entity.Cost" table="cost" catalog="copycenter" optimistic-lock="version">
+        <composite-id name="id" class="com.mycompany.copycenter.entity.CostId">
+            <key-property name="materialsIdMaterials" type="int">
+                <column name="Materials_idMaterials" />
+            </key-property>
+            <key-property name="typeIdType" type="int">
+                <column name="Type_idType" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="materials" class="com.mycompany.copycenter.entity.Materials" update="false" insert="false" fetch="select">
+            <column name="Materials_idMaterials" not-null="true" />
+        </many-to-one>
+        <many-to-one name="type" class="com.mycompany.copycenter.entity.Type" update="false" insert="false" fetch="select">
+            <column name="Type_idType" not-null="true" />
+        </many-to-one>
+        <property name="sizePerOne" type="int">
+            <column name="sizePerOne" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
