@@ -14,7 +14,6 @@ public class Order  implements java.io.Serializable {
      private Type type;
      private User user;
      private int size;
-     private Date term;
      private float price;
      private String clientName;
      private String clientPhone;
@@ -24,20 +23,18 @@ public class Order  implements java.io.Serializable {
     }
 
 	
-    public Order(int idOrder, Type type, int size, Date term, float price, String orderStatus) {
+    public Order(int idOrder, Type type, int size, float price, String orderStatus) {
         this.idOrder = idOrder;
         this.type = type;
         this.size = size;
-        this.term = term;
         this.price = price;
         this.orderStatus = orderStatus;
     }
-    public Order(int idOrder, Type type, User user, int size, Date term, float price, String clientName, String clientPhone, String orderStatus) {
+    public Order(int idOrder, Type type, User user, int size, float price, String clientName, String clientPhone, String orderStatus) {
        this.idOrder = idOrder;
        this.type = type;
        this.user = user;
        this.size = size;
-       this.term = term;
        this.price = price;
        this.clientName = clientName;
        this.clientPhone = clientPhone;
@@ -72,13 +69,7 @@ public class Order  implements java.io.Serializable {
     public void setSize(int size) {
         this.size = size;
     }
-    public Date getTerm() {
-        return this.term;
-    }
     
-    public void setTerm(Date term) {
-        this.term = term;
-    }
     public float getPrice() {
         return this.price;
     }
