@@ -1,5 +1,5 @@
 package com.mycompany.copycenter.entity;
-// Generated 23.03.2018 1:40:35 by Hibernate Tools 4.3.1
+// Generated 23.03.2018 12:15:32 by Hibernate Tools 4.3.1
 
 
 
@@ -9,7 +9,7 @@ package com.mycompany.copycenter.entity;
 public class Orders  implements java.io.Serializable {
 
 
-     private int idOrder;
+     private Integer idOrder;
      private Types types;
      private Users users;
      private int size;
@@ -22,15 +22,13 @@ public class Orders  implements java.io.Serializable {
     }
 
 	
-    public Orders(int idOrder, Types types, int size, float price, String orderStatus) {
-        this.idOrder = idOrder;
+    public Orders(Types types, int size, float price, String orderStatus) {
         this.types = types;
         this.size = size;
         this.price = price;
         this.orderStatus = orderStatus;
     }
-    public Orders(int idOrder, Types types, Users users, int size, float price, String clientName, String clientPhone, String orderStatus) {
-       this.idOrder = idOrder;
+    public Orders(Types types, Users users, int size, float price, String clientName, String clientPhone, String orderStatus) {
        this.types = types;
        this.users = users;
        this.size = size;
@@ -40,11 +38,11 @@ public class Orders  implements java.io.Serializable {
        this.orderStatus = orderStatus;
     }
    
-    public int getIdOrder() {
+    public Integer getIdOrder() {
         return this.idOrder;
     }
     
-    public void setIdOrder(int idOrder) {
+    public void setIdOrder(Integer idOrder) {
         this.idOrder = idOrder;
     }
     public Types getTypes() {

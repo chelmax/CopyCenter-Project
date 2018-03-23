@@ -1,5 +1,5 @@
 package com.mycompany.copycenter.entity;
-// Generated 23.03.2018 1:40:35 by Hibernate Tools 4.3.1
+// Generated 23.03.2018 12:15:32 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,6 +14,7 @@ public class Users  implements java.io.Serializable {
      private Integer idUser;
      private String name;
      private String surname;
+     private String password;
      private String post;
      private int salary;
      private Set orderses = new HashSet(0);
@@ -22,15 +23,17 @@ public class Users  implements java.io.Serializable {
     }
 
 	
-    public Users(String name, String surname, String post, int salary) {
+    public Users(String name, String surname, String password, String post, int salary) {
         this.name = name;
         this.surname = surname;
+        this.password = password;
         this.post = post;
         this.salary = salary;
     }
-    public Users(String name, String surname, String post, int salary, Set orderses) {
+    public Users(String name, String surname, String password, String post, int salary, Set orderses) {
        this.name = name;
        this.surname = surname;
+       this.password = password;
        this.post = post;
        this.salary = salary;
        this.orderses = orderses;
@@ -56,6 +59,13 @@ public class Users  implements java.io.Serializable {
     
     public void setSurname(String surname) {
         this.surname = surname;
+    }
+    public String getPassword() {
+        return this.password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
     }
     public String getPost() {
         return this.post;

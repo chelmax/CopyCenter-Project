@@ -17,10 +17,6 @@ import org.hibernate.Session;
  */
 public class QueryExecuter {
     
-    public static void main(String[] args) {
-     
-    }
-    
     public static List executeGetterHQLQuery(String hql) {
         try {
             Session session = NewHibernateUtil.getSessionFactory().openSession();
