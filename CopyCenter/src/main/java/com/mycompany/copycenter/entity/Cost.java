@@ -1,5 +1,5 @@
 package com.mycompany.copycenter.entity;
-// Generated 21.03.2018 14:53:46 by Hibernate Tools 4.3.1
+// Generated 23.03.2018 1:40:35 by Hibernate Tools 4.3.1
 
 
 
@@ -11,16 +11,16 @@ public class Cost  implements java.io.Serializable {
 
      private CostId id;
      private Materials materials;
-     private Type type;
+     private Types types;
      private int sizePerOne;
 
     public Cost() {
     }
 
-    public Cost(CostId id, Materials materials, Type type, int sizePerOne) {
+    public Cost(CostId id, Materials materials, Types types, int sizePerOne) {
        this.id = id;
        this.materials = materials;
-       this.type = type;
+       this.types = types;
        this.sizePerOne = sizePerOne;
     }
    
@@ -38,12 +38,12 @@ public class Cost  implements java.io.Serializable {
     public void setMaterials(Materials materials) {
         this.materials = materials;
     }
-    public Type getType() {
-        return this.type;
+    public Types getTypes() {
+        return this.types;
     }
     
-    public void setType(Type type) {
-        this.type = type;
+    public void setTypes(Types types) {
+        this.types = types;
     }
     public int getSizePerOne() {
         return this.sizePerOne;

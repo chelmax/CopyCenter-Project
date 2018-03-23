@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23.03.2018 1:40:36 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.mycompany.copycenter.entity.Orders" table="orders" catalog="copycenter" optimistic-lock="version">
+        <id name="idOrder" type="int">
+            <column name="idOrder" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="types" class="com.mycompany.copycenter.entity.Types" fetch="select">
+            <column name="idType" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="com.mycompany.copycenter.entity.Users" fetch="select">
+            <column name="idUser" />
+        </many-to-one>
+        <property name="size" type="int">
+            <column name="size" not-null="true" />
+        </property>
+        <property name="price" type="float">
+            <column name="price" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="clientName" type="string">
+            <column name="clientName" length="45" />
+        </property>
+        <property name="clientPhone" type="string">
+            <column name="clientPhone" length="45" />
+        </property>
+        <property name="orderStatus" type="string">
+            <column name="orderStatus" length="45" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

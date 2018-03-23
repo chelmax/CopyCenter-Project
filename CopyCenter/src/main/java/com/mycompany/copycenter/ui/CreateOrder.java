@@ -5,11 +5,12 @@
  */
 package com.mycompany.copycenter.ui;
 
+import com.mycompany.copycenter.entity.Types;
 import com.mycompany.copycenter.ex.ui.WrongInput;
 import com.mycompany.copycenter.tools.PriceHolder;
-import java.util.List;
+import com.mycompany.copycenter.tools.QueryExecuter;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -37,7 +38,6 @@ public class CreateOrder extends javax.swing.JFrame {
 
         typeLabel = new javax.swing.JLabel();
         sizeLabel = new javax.swing.JLabel();
-        typeField = new javax.swing.JTextField();
         sizeField = new javax.swing.JTextField();
         okButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -48,24 +48,36 @@ public class CreateOrder extends javax.swing.JFrame {
         nameField = new javax.swing.JTextField();
         phoneField = new javax.swing.JTextField();
         priceButton = new javax.swing.JButton();
+        typesBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        typeLabel.setText("Тип заказа");
+        typeLabel.setText("Type");
 
-        sizeLabel.setText("Размер");
+        sizeLabel.setText("Size");
+
+        sizeField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                sizeFieldKeyTyped(evt);
+            }
+        });
 
         okButton.setText("OK");
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel5.setText("Данные о клиенте: ");
+        jLabel5.setText("Customer information: ");
 
-        nameLabel.setText("Имя");
+        nameLabel.setText("Surname");
 
-        jLabel7.setText("Данные о заказе:");
+        jLabel7.setText("Order information:");
 
         priceField.setEditable(false);
 
-        phoneLabel.setText("Телефон");
+        phoneLabel.setText("Phone number");
 
         priceButton.setText("К оплате");
         priceButton.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +85,8 @@ public class CreateOrder extends javax.swing.JFrame {
                 priceButtonActionPerformed(evt);
             }
         });
+
+        typesBox.setModel(new javax.swing.DefaultComboBoxModel<>(getTypesNames()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,13 +100,10 @@ public class CreateOrder extends javax.swing.JFrame {
                             .addComponent(sizeLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(typeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(priceButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(93, 93, 93)
-                                .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(93, 93, 93)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(priceField, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                            .addComponent(typesBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(phoneLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -108,14 +119,14 @@ public class CreateOrder extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(162, 162, 162)
                         .addComponent(okButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(72, 72, 72)
-                        .addComponent(jLabel7)))
+                        .addComponent(jLabel7))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(68, 68, 68)
+                        .addComponent(jLabel5)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,7 +137,7 @@ public class CreateOrder extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(typeLabel)
-                    .addComponent(typeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(typesBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sizeLabel)
@@ -142,9 +153,9 @@ public class CreateOrder extends javax.swing.JFrame {
                     .addComponent(nameLabel)
                     .addComponent(nameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(phoneLabel)
-                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(phoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneLabel))
                 .addGap(45, 45, 45)
                 .addComponent(okButton)
                 .addContainerGap())
@@ -152,29 +163,52 @@ public class CreateOrder extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private String[] getTypesNames(){
+        List<Types> typesList = QueryExecuter.executeGetterHQLQuery("from Types");
+        List<String> typesNames = new ArrayList<>();
+        for(Types type : typesList)
+            typesNames.add(type.getName());
+        return typesNames.toArray(new String[typesNames.size()]);
+    }
+    
     private void priceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceButtonActionPerformed
-        float price;
-        List<String> validTypes = new ArrayList<>(
-                Arrays.asList(new String[]{
-                    "печать", "ксерокс", "фотопечать"
-                })
-        );
-        String type = typeField.getText().toLowerCase();
-        if(validTypes.contains(type)){
-            price = new PriceHolder().getPrice(type);
-        } else{
-            new WrongInput(this, true).setVisible(true);
-            return;
-        }
+        String type = (String) typesBox.getSelectedItem();
         try{
-            price *= Integer.parseInt(sizeField.getText());
-        }catch(java.lang.NumberFormatException validFail){
+            float price = new PriceHolder().getPrice(type) 
+                    * Integer.parseInt(sizeField.getText());
+            priceField.setText(String.valueOf(price));
+        }catch(Exception ex){
+            new WrongInput(this, true).setVisible(true);
+        }
+    }//GEN-LAST:event_priceButtonActionPerformed
+
+    private void sizeFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_sizeFieldKeyTyped
+        priceField.setText(null);
+    }//GEN-LAST:event_sizeFieldKeyTyped
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
+        if(priceField.getText().isEmpty()){
             new WrongInput(this, true).setVisible(true);
             return;
         }
-        priceField.setText(String.valueOf(price));
-    }//GEN-LAST:event_priceButtonActionPerformed
+        List<Types> type = QueryExecuter.executeGetterHQLQuery(
+                "from Types t where t.name = " + 
+                "'" + (String) typesBox.getSelectedItem() + "'"
+        );
+        int idCurrentType = type.get(0).getIdType();
+        QueryExecuter.executeSQLQuery(
+                "INSERT INTO `Orders` (idType, size, price, clientName, "
+                + "clientPhone, orderStatus)VALUES ("
+                + "'" + idCurrentType + "', "
+                + "'" + sizeField.getText() + "', "
+                + "'" + priceField.getText() + "', "
+                + "'" + nameField.getText() + "', "
+                + "'" + phoneField.getText() + "', "
+                + "'Waiting for processing')"
+        );
+        this.dispose();
+    }//GEN-LAST:event_okButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -189,7 +223,7 @@ public class CreateOrder extends javax.swing.JFrame {
     private javax.swing.JTextField priceField;
     private javax.swing.JTextField sizeField;
     private javax.swing.JLabel sizeLabel;
-    private javax.swing.JTextField typeField;
     private javax.swing.JLabel typeLabel;
+    private javax.swing.JComboBox<String> typesBox;
     // End of variables declaration//GEN-END:variables
 }

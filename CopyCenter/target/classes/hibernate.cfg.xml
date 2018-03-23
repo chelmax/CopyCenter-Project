@@ -49,9 +49,9 @@ Contributor(s):
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.query.factory_class">org.hibernate.hql.internal.classic.ClassicQueryTranslatorFactory</property>
     <mapping resource="com/mycompany/copycenter/entity/Materials.hbm.xml"/>
-    <mapping resource="com/mycompany/copycenter/entity/User.hbm.xml"/>
+    <mapping resource="com/mycompany/copycenter/entity/Orders.hbm.xml"/>
     <mapping resource="com/mycompany/copycenter/entity/Cost.hbm.xml"/>
-    <mapping resource="com/mycompany/copycenter/entity/Type.hbm.xml"/>
-    <mapping resource="com/mycompany/copycenter/entity/Order.hbm.xml"/>
+    <mapping resource="com/mycompany/copycenter/entity/Types.hbm.xml"/>
+    <mapping resource="com/mycompany/copycenter/entity/Users.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
