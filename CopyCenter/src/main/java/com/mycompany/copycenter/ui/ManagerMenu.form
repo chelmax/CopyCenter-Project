@@ -26,8 +26,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="orderButton" pref="147" max="32767" attributes="0"/>
+                  <Component id="createOrderButton" pref="147" max="32767" attributes="0"/>
                   <Component id="profileButton" max="32767" attributes="0"/>
+                  <Component id="payOrderButton" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="67" max="32767" attributes="0"/>
           </Group>
@@ -36,11 +37,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
               <Component id="profileButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="66" max="32767" attributes="0"/>
-              <Component id="orderButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
+              <Component id="createOrderButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+              <Component id="payOrderButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -48,18 +51,26 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="profileButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x412;&#x430;&#x448; &#x43f;&#x440;&#x43e;&#x444;&#x438;&#x43b;&#x44c;"/>
+        <Property name="text" type="java.lang.String" value="Show profile"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profileButtonActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="orderButton">
+    <Component class="javax.swing.JButton" name="createOrderButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&#x414;&#x43e;&#x431;&#x430;&#x432;&#x438;&#x442;&#x44c; &#x437;&#x430;&#x43a;&#x430;&#x437;"/>
+        <Property name="text" type="java.lang.String" value="Create order"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="orderButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="createOrderButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JToggleButton" name="payOrderButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Confirm payment"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="payOrderButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

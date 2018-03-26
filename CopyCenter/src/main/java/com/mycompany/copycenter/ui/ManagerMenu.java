@@ -26,21 +26,29 @@ public class ManagerMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         profileButton = new javax.swing.JButton();
-        orderButton = new javax.swing.JButton();
+        createOrderButton = new javax.swing.JButton();
+        payOrderButton = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        profileButton.setText("Ваш профиль");
+        profileButton.setText("Show profile");
         profileButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 profileButtonActionPerformed(evt);
             }
         });
 
-        orderButton.setText("Добавить заказ");
-        orderButton.addActionListener(new java.awt.event.ActionListener() {
+        createOrderButton.setText("Create order");
+        createOrderButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                orderButtonActionPerformed(evt);
+                createOrderButtonActionPerformed(evt);
+            }
+        });
+
+        payOrderButton.setText("Confirm payment");
+        payOrderButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payOrderButtonActionPerformed(evt);
             }
         });
 
@@ -51,35 +59,42 @@ public class ManagerMenu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(orderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
-                    .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(createOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(payOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(45, 45, 45)
                 .addComponent(profileButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 66, Short.MAX_VALUE)
-                .addComponent(orderButton)
-                .addGap(51, 51, 51))
+                .addGap(49, 49, 49)
+                .addComponent(createOrderButton)
+                .addGap(47, 47, 47)
+                .addComponent(payOrderButton)
+                .addContainerGap(49, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderButtonActionPerformed
-        new CreateOrder().setVisible(true);
-    }//GEN-LAST:event_orderButtonActionPerformed
+    private void createOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createOrderButtonActionPerformed
+        new OrderCreatorForm().setVisible(true);
+    }//GEN-LAST:event_createOrderButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
-        String test = CurrentUser.getCurrentUser().getName();
-        System.out.println(test);
+        new UserInfoForm().setVisible(true);
     }//GEN-LAST:event_profileButtonActionPerformed
+
+    private void payOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payOrderButtonActionPerformed
+        new OrderPaymentForm().setVisible(true);
+    }//GEN-LAST:event_payOrderButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton orderButton;
+    private javax.swing.JButton createOrderButton;
+    private javax.swing.JToggleButton payOrderButton;
     private javax.swing.JButton profileButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class LoginForm extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form LoginFrame
      */
     public LoginForm() {
         initComponents();
@@ -115,7 +115,6 @@ public class LoginForm extends javax.swing.JFrame {
         passwordField.setText(null);
     }//GEN-LAST:event_passwordFieldFocusGained
 
-    @Deprecated
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         List<Users> user = QueryExecuter.executeGetterHQLQuery(
                 "from Users u where "
@@ -123,7 +122,7 @@ public class LoginForm extends javax.swing.JFrame {
                 + "u.surname = '" + surnameField.getText() + "' && "
                 + "u.password = '" + passwordField.getText() + "'"
         );
-        if(user == null){
+        if(user.isEmpty()){
             new WrongInput(this, true).setVisible(true);
         } else{
             Users currentUser = user.get(0);
@@ -131,6 +130,9 @@ public class LoginForm extends javax.swing.JFrame {
             switch(currentUser.getPost()){
                 case "manager": 
                     new ManagerMenu().setVisible(true);
+                    break;
+                case "operator":
+                    new ManagerMenu().setVisible(true); //другая форма
                     break;
             }
             this.dispose();
