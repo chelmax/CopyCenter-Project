@@ -6,7 +6,7 @@
 package com.mycompany.copycenter.ui;
 
 import com.mycompany.copycenter.ex.ui.WrongInput;
-import com.mycompany.copycenter.tools.QueryExecuter;
+import com.mycompany.copycenter.tools.Authorization;
 
 /**
  *
@@ -14,14 +14,21 @@ import com.mycompany.copycenter.tools.QueryExecuter;
  */
 public class SignupForm extends javax.swing.JFrame {
 
+    private final Authorization model;
+    
     /**
      * Creates new form SignupForm
      */
     public SignupForm() {
+        this.model = new Authorization();
+        init();
+    }
+    
+    private void init() {
         initComponents();
         this.setResizable(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -115,29 +122,21 @@ public class SignupForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
-        if(validation()){
-            QueryExecuter.executeSQLQuery(
-                    "INSERT INTO Users (name, surname, password, post, salary) VALUES ("
-                    + "'" + nameField.getText()+ "', "
-                    + "'" + surnameField.getText() + "', "
-                    + "'" + passwordField.getText() + "', "
-                    + "'" + (String) postBox.getSelectedItem() + "', "
-                    + "0)"
-            );
+        if(model.signup(
+                nameField.getText(), 
+                surnameField.getText(), 
+                passwordField.getPassword(), 
+                rpasswordField.getPassword(), 
+                (String) postBox.getSelectedItem()
+        )){    
             this.dispose();
         } else{
             new WrongInput(this, true).setVisible(true);
         }
     }//GEN-LAST:event_registerButtonActionPerformed
     
-    @Deprecated
-    private boolean validation() {
-        if("".equals(nameField.getText()) || "".equals(passwordField.getText()) || "".equals(surnameField.getText()) )
-            return false;
-        if(!passwordField.getText().equals(rpasswordField.getText()))
-            return false;
-        return true;
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel loginLabel;
@@ -152,6 +151,4 @@ public class SignupForm extends javax.swing.JFrame {
     private javax.swing.JTextField surnameField;
     private javax.swing.JLabel surnameLabel;
     // End of variables declaration//GEN-END:variables
-
-   
 }

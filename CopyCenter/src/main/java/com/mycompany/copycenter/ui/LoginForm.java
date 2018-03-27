@@ -5,26 +5,33 @@
  */
 package com.mycompany.copycenter.ui;
 
-import com.mycompany.copycenter.entity.Users;
+import com.mycompany.copycenter.ui.managerUI.ManagerMenu;
 import com.mycompany.copycenter.ex.ui.WrongInput;
+import com.mycompany.copycenter.tools.Authorization;
 import com.mycompany.copycenter.tools.CurrentUser;
-import com.mycompany.copycenter.tools.QueryExecuter;
-import java.util.List;
+import com.mycompany.copycenter.ui.operatorUI.OperatorMenu;
 
 /**
  *
  * @author max19
  */
 public class LoginForm extends javax.swing.JFrame {
-
+    
+    private final Authorization model;
+    
     /**
      * Creates new form LoginFrame
      */
     public LoginForm() {
+        this.model = new Authorization();
+        init();
+    }
+    
+    private void init(){
         initComponents();
         this.setResizable(false);
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -116,23 +123,20 @@ public class LoginForm extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFieldFocusGained
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
-        List<Users> user = QueryExecuter.executeGetterHQLQuery(
-                "from Users u where "
-                + "u.name = '" + nameField.getText() + "' && "
-                + "u.surname = '" + surnameField.getText() + "' && "
-                + "u.password = '" + passwordField.getText() + "'"
-        );
-        if(user.isEmpty()){
+        passwordField.getPassword();
+        if(!model.login(
+                nameField.getText(),
+                surnameField.getText(),
+                passwordField.getPassword()
+        )){
             new WrongInput(this, true).setVisible(true);
         } else{
-            Users currentUser = user.get(0);
-            CurrentUser.setCurrentUser(currentUser);
-            switch(currentUser.getPost()){
+            switch(CurrentUser.getCurrentUser().getPost()){
                 case "manager": 
                     new ManagerMenu().setVisible(true);
                     break;
                 case "operator":
-                    new ManagerMenu().setVisible(true); //другая форма
+                    new OperatorMenu().setVisible(true); 
                     break;
             }
             this.dispose();
@@ -173,6 +177,7 @@ public class LoginForm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new LoginForm().setVisible(true);
             }

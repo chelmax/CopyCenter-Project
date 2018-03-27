@@ -13,6 +13,8 @@ public class WrongInput extends javax.swing.JDialog {
 
     /**
      * Creates new form WrongInput
+     * @param parent
+     * @param modal
      */
     public WrongInput(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

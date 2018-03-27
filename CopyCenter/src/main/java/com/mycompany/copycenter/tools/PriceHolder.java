@@ -22,7 +22,7 @@ public class PriceHolder {
 
     public PriceHolder() {
         priceList = new HashMap<>();
-        try(FileInputStream fis =  new FileInputStream("C:\\Users\\max19\\Documents\\NetBeansProjects\\CopyCenter\\src\\main\\resources\\pricelist.bin")){
+        try(FileInputStream fis =  new FileInputStream("priceList.bin")){
             ObjectInputStream is = new ObjectInputStream(fis);
             priceList = (Map) is.readObject();
         }catch(Exception ex){
@@ -32,7 +32,7 @@ public class PriceHolder {
 
     public void setPriceList(Map<String, Float> price) {
         priceList.putAll(price);
-        try(FileOutputStream fos =  new FileOutputStream("C:\\Users\\max19\\Documents\\NetBeansProjects\\CopyCenter\\src\\main\\resources\\pricelist.bin")){
+        try(FileOutputStream fos =  new FileOutputStream("pricelist.bin")){
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(priceList);
         }catch(Exception ex){
