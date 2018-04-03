@@ -1,5 +1,5 @@
 package com.mycompany.copycenter.entity;
-// Generated 23.03.2018 12:15:32 by Hibernate Tools 4.3.1
+// Generated 30.03.2018 12:54:50 by Hibernate Tools 4.3.1
 
 
 

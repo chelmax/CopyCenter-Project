@@ -17,15 +17,15 @@ import java.util.Map;
  *
  * @author max19
  */
-public class PriceHolder implements MapHolder{
-
+public class CostsHolder implements MapHolder{
+    
     @Override
     public void setMap(Map<String, Float> price) {
-        Map<String, Float> priceList = getMap();
-        priceList.putAll(price);
-        try(FileOutputStream fos =  new FileOutputStream("pricelist.bin")){
+        Map<String, Float> currentCosts = getMap();
+        currentCosts.putAll(price);
+        try(FileOutputStream fos =  new FileOutputStream("currentcosts.bin")){
             ObjectOutputStream os = new ObjectOutputStream(fos);
-            os.writeObject(priceList);
+            os.writeObject(currentCosts);
         }catch(Exception ex){
             System.err.println(ex);
         }
@@ -33,19 +33,19 @@ public class PriceHolder implements MapHolder{
     
     @Override
     public Map<String, Float> getMap(){
-        Map<String, Float> priceList = new HashMap<>();
-        try(FileInputStream fis =  new FileInputStream("priceList.bin")){
+        Map<String, Float> currentCosts = new HashMap<>();
+        try(FileInputStream fis =  new FileInputStream("currentcosts.bin")){
             ObjectInputStream is = new ObjectInputStream(fis);
-            priceList = (Map) is.readObject();
+            currentCosts = (Map) is.readObject();
         }catch(Exception ex){
             System.err.println(ex);
         }
-        return priceList;
+        return currentCosts;
     }
     
-   
     @Override
     public float getElement(String type) {
         return getMap().get(type);
-    }  
+    }
+    
 }

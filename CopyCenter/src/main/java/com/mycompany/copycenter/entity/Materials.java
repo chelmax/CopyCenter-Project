@@ -1,5 +1,5 @@
 package com.mycompany.copycenter.entity;
-// Generated 23.03.2018 12:15:32 by Hibernate Tools 4.3.1
+// Generated 30.03.2018 12:54:50 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -14,19 +14,22 @@ public class Materials  implements java.io.Serializable {
      private Integer idMaterials;
      private String name;
      private int quantity;
+     private float cost;
      private Set costs = new HashSet(0);
 
     public Materials() {
     }
 
 	
-    public Materials(String name, int quantity) {
+    public Materials(String name, int quantity, float cost) {
         this.name = name;
         this.quantity = quantity;
+        this.cost = cost;
     }
-    public Materials(String name, int quantity, Set costs) {
+    public Materials(String name, int quantity, float cost, Set costs) {
        this.name = name;
        this.quantity = quantity;
+       this.cost = cost;
        this.costs = costs;
     }
    
@@ -50,6 +53,13 @@ public class Materials  implements java.io.Serializable {
     
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+    public float getCost() {
+        return this.cost;
+    }
+    
+    public void setCost(float cost) {
+        this.cost = cost;
     }
     public Set getCosts() {
         return this.costs;
