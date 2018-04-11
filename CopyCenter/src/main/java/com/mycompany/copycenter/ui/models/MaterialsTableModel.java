@@ -6,19 +6,18 @@
 package com.mycompany.copycenter.ui.models;
 
 import com.mycompany.copycenter.entity.Materials;
-import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.tools.PriceHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
+import com.mycompany.copycenter.tools.interfaces.TableWithButtons;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 /**
  *
  * @author max19
  */
-public class MaterialsTableModel {
+public class MaterialsTableModel implements TableWithButtons{
     private List<Materials> materialsList;
     private Vector<Object> materials;
     private Vector<String> columnNames;
@@ -32,6 +31,7 @@ public class MaterialsTableModel {
     }
 
    
+    @Override
     public final void getDataFromDB(){
         materialsList = new ArrayList<>();
         materials = new Vector<>();
@@ -64,16 +64,19 @@ public class MaterialsTableModel {
         columnNames.add("Cost");
     }
    
-    public Vector<Object> getMaterials() {
+    @Override
+    public Vector<Object> getRows() {
         return materials;
     }
 
    
+    @Override
     public Vector<String> getColumnNames() {
         return columnNames;
     }
     
    
+    @Override
     public List<String> getButtonsText() {
         List<String> buttonsText = new ArrayList<>();
         buttonsText.add(buttonText1);
@@ -82,7 +85,8 @@ public class MaterialsTableModel {
         return buttonsText;
     }
     
-    public String[] getMaterialsNames(){
+    @Override
+    public String[] getDialogBoxData(){
         List<String> materialsNames = new ArrayList<>();
         materialsList.forEach((m) -> {
             materialsNames.add(String.valueOf(m.getName()));

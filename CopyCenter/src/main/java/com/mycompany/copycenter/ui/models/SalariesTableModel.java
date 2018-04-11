@@ -9,16 +9,16 @@ import com.mycompany.copycenter.entity.Orders;
 import com.mycompany.copycenter.entity.Users;
 import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
+import com.mycompany.copycenter.tools.interfaces.TableWithButtons;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
 /**
  *
  * @author max19
  */
-public class SalariesTableModel {
+public class SalariesTableModel implements TableWithButtons{
     private List<Users> stuffList;
     private Vector<Object> stuff;
     private Vector<String> columnNames;
@@ -31,6 +31,7 @@ public class SalariesTableModel {
     }
 
    
+    @Override
     public final void getDataFromDB(){
         stuffList = new ArrayList<>();
         stuff = new Vector<>();
@@ -65,16 +66,19 @@ public class SalariesTableModel {
         columnNames.add("Salary");
     }
    
-    public Vector<Object> getStuff() {
+    @Override
+    public Vector<Object> getRows() {
         return stuff;
     }
 
    
+    @Override
     public Vector<String> getColumnNames() {
         return columnNames;
     }
     
    
+    @Override
     public List<String> getButtonsText() {
         List<String> buttonsText = new ArrayList<>();
         buttonsText.add(buttonText1);
@@ -82,7 +86,8 @@ public class SalariesTableModel {
         return buttonsText;
     }
     
-    public String[] getStuffNames(){
+    @Override
+    public String[] getDialogBoxData(){
         List<String> stuffNames = new ArrayList<>();
         stuffList.forEach((user) -> {
             stuffNames.add(String.valueOf(user.getName()) + " " + user.getSurname());
@@ -92,11 +97,10 @@ public class SalariesTableModel {
 
     public void payOff(float salariesSum) {
         CostsHolder ch = new CostsHolder();
-        Map<String, Float> currentCosts = ch.getMap();
-        currentCosts.put("salaries", salariesSum);
-        ch.setMap(currentCosts);
+        ch.setMap("salaries", salariesSum);
         QueryExecuter.executeSQLQuery(
-                "Update Orders set idUser = null where idOrder > 0"
+                "Update Orders set idUser = null where idOrder > 0 " +
+                "and orderStatus not like 'Processing'"
         );
     }
     

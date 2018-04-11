@@ -18,6 +18,10 @@ public class WrongInput extends javax.swing.JDialog {
      */
     public WrongInput(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        init();
+    }
+    
+    private void init(){
         initComponents();
         this.setResizable(false);
     }

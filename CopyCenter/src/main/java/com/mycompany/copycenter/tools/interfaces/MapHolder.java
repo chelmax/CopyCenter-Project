@@ -15,9 +15,16 @@ public interface MapHolder {
     
     /**
      * Sets new Map into the holder file
+     * @param map
+     */
+    public void setMap(Map<String, Float> map);
+    
+    /**
+     * Sets new Map into the holder file
+     * @param key
      * @param price
      */
-    public void setMap(Map<String, Float> price);
+    public void setMap(String key, Float price);
     
     /**
      * Gets Map into the holder file

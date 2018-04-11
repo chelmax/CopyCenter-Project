@@ -10,7 +10,6 @@ import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
 import com.mycompany.copycenter.tools.interfaces.TextWithBoxAndValue;
 import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -41,11 +40,7 @@ public class OrderMaterialModel implements TextWithBoxAndValue{
         List<Materials> material = QueryExecuter.executeGetterHQLQuery(
                 "from Materials m where m.name = '" + arr[0] + "'"
         );
-        CostsHolder ch = new CostsHolder();
-        Map<String, Float> currentCosts = ch.getMap();
-        currentCosts.put(arr[0], Float.valueOf(arr[1]) * material.get(0).getCost());
-        Map test = ch.getMap();
-        ch.setMap(currentCosts);
+        new CostsHolder().setMap(arr[0], Float.valueOf(arr[1]) * material.get(0).getCost());
         QueryExecuter.executeSQLQuery("UPDATE Materials "
                 + "set quantity = quantity + " + arr[1] + " "
                 + "where name = '" + arr[0] + "' "

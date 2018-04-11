@@ -8,6 +8,7 @@ package com.mycompany.copycenter.ui;
 import com.mycompany.copycenter.ex.ui.UpdateError;
 import com.mycompany.copycenter.tools.interfaces.TextWithBox;
 import com.mycompany.copycenter.tools.interfaces.TableRefresher;
+import com.mycompany.copycenter.ui.models.DeleteMaterialFromTypeModel;
 import java.awt.Frame;
 
 /**
@@ -78,8 +79,8 @@ public class TextWithBoxDialog extends javax.swing.JDialog {
                         .addGap(84, 84, 84)
                         .addComponent(okButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(idOrdersBox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addComponent(idOrdersBox, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +100,8 @@ public class TextWithBoxDialog extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         if(!model.update((String) idOrdersBox.getSelectedItem()))               //задебажить при добавлении нового типа
             new UpdateError((Frame) parent, true).setVisible(true);
-        parent.refreshTable();
+        if(!model.getClass().equals(DeleteMaterialFromTypeModel.class))
+            parent.refreshTable();
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
     

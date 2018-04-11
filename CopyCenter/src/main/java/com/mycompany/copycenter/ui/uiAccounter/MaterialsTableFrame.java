@@ -16,11 +16,7 @@ import com.mycompany.copycenter.ui.models.OrderMaterialModel;
  * @author max19
  */
 public class MaterialsTableFrame extends javax.swing.JFrame implements TableRefresher{
-    
-    public static void main(String[] args){
-        new MaterialsTableFrame().setVisible(true);
-    }
-    
+   
     private final MaterialsTableModel model = new MaterialsTableModel();
     
     /**
@@ -52,7 +48,7 @@ public class MaterialsTableFrame extends javax.swing.JFrame implements TableRefr
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        materialsTable.setModel(new MaterialsTableViewModel(model.getMaterials(), model.getColumnNames()));
+        materialsTable.setModel(new MaterialsTableViewModel(model.getRows(), model.getColumnNames()));
         jScrollPane1.setViewportView(materialsTable);
 
         jButton1.setText(model.getButtonsText().get(0));
@@ -112,11 +108,11 @@ public class MaterialsTableFrame extends javax.swing.JFrame implements TableRefr
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new NewValueDialog(this, true, new OrderMaterialModel(),model.getMaterialsNames()).setVisible(true);
+        new NewValueDialog(this, true, new OrderMaterialModel(),model.getDialogBoxData()).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new NewValueDialog(this, true, new ChangeCostModel(),model.getMaterialsNames()).setVisible(true);
+        new NewValueDialog(this, true, new ChangeCostModel(),model.getDialogBoxData()).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -128,7 +124,7 @@ public class MaterialsTableFrame extends javax.swing.JFrame implements TableRefr
         MaterialsTableViewModel tableModel = (MaterialsTableViewModel) materialsTable.getModel();
         tableModel.changeModel();
         model.getDataFromDB();
-        materialsTable.setModel(new MaterialsTableViewModel(model.getMaterials(), model.getColumnNames()));
+        materialsTable.setModel(new MaterialsTableViewModel(model.getRows(), model.getColumnNames()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

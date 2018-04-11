@@ -20,9 +20,21 @@ import java.util.Map;
 public class CostsHolder implements MapHolder{
     
     @Override
-    public void setMap(Map<String, Float> price) {
+    public void setMap(Map<String, Float> map) {
         Map<String, Float> currentCosts = getMap();
-        currentCosts.putAll(price);
+        currentCosts.putAll(map);
+        try(FileOutputStream fos =  new FileOutputStream("currentcosts.bin")){
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(currentCosts);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+    }
+    
+    @Override
+    public void setMap(String key, Float price) {
+        Map<String, Float> currentCosts = getMap();
+        currentCosts.put(key, price);
         try(FileOutputStream fos =  new FileOutputStream("currentcosts.bin")){
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(currentCosts);

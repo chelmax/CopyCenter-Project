@@ -7,10 +7,10 @@ package com.mycompany.copycenter.ui.models;
 
 import com.mycompany.copycenter.entity.Orders;
 import com.mycompany.copycenter.tools.QueryExecuter;
+import com.mycompany.copycenter.tools.interfaces.OrdersTableWithButtons;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
-import com.mycompany.copycenter.tools.interfaces.OrdersTableWithButtons;
 
 /**
  *
@@ -64,7 +64,7 @@ public class OrderGettingModel implements OrdersTableWithButtons{
     }
 
     @Override
-    public Vector<Object> getOrders() {
+    public Vector<Object> getRows() {
         return wfProcessingOrders;
     }
 
@@ -81,7 +81,7 @@ public class OrderGettingModel implements OrdersTableWithButtons{
     }
     
     @Override
-    public String[] getOrdersID(){
+    public String[] getDialogBoxData(){
         List<String> ordersID = new ArrayList<>();
         wfProcessingOrdersList.forEach((order) -> {
             ordersID.add(String.valueOf(order.getIdOrder()));

@@ -6,6 +6,7 @@
 package com.mycompany.copycenter.ui.uiAccounter;
 
 import com.mycompany.copycenter.ui.UserInfoFrame;
+import com.mycompany.copycenter.ui.models.OrderLogModel;
 
 /**
  *
@@ -29,11 +30,15 @@ public class AccountantMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         salariesButton = new javax.swing.JButton();
         materialsButton = new javax.swing.JButton();
         costsButton = new javax.swing.JButton();
         profileButton = new javax.swing.JButton();
         typesLabel = new javax.swing.JButton();
+        logButton = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -72,6 +77,13 @@ public class AccountantMenu extends javax.swing.JFrame {
             }
         });
 
+        logButton.setText("Orders log");
+        logButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,7 +95,8 @@ public class AccountantMenu extends javax.swing.JFrame {
                     .addComponent(salariesButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(costsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(typesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(typesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(logButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -91,11 +104,13 @@ public class AccountantMenu extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(52, 52, 52)
                 .addComponent(profileButton)
-                .addGap(37, 37, 37)
+                .addGap(41, 41, 41)
+                .addComponent(logButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(typesLabel)
                 .addGap(44, 44, 44)
                 .addComponent(salariesButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addComponent(materialsButton)
                 .addGap(48, 48, 48)
                 .addComponent(costsButton)
@@ -110,7 +125,7 @@ public class AccountantMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_salariesButtonActionPerformed
 
     private void costsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_costsButtonActionPerformed
-        // TODO add your handling code here:
+        new CostsFrame().setVisible(true);
     }//GEN-LAST:event_costsButtonActionPerformed
 
     private void profileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profileButtonActionPerformed
@@ -122,11 +137,17 @@ public class AccountantMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_materialsButtonActionPerformed
 
     private void typesLabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_typesLabelActionPerformed
-        // TODO add your handling code here:
+        new TypesTableFrame().setVisible(true);
     }//GEN-LAST:event_typesLabelActionPerformed
+
+    private void logButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logButtonActionPerformed
+        new  TableFrame(new OrderLogModel()).setVisible(true);
+    }//GEN-LAST:event_logButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton costsButton;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton logButton;
     private javax.swing.JButton materialsButton;
     private javax.swing.JButton profileButton;
     private javax.swing.JButton salariesButton;

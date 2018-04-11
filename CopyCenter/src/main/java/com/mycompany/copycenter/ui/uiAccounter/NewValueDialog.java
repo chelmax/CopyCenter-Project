@@ -8,6 +8,7 @@ package com.mycompany.copycenter.ui.uiAccounter;
 import com.mycompany.copycenter.ex.ui.WrongInput;
 import com.mycompany.copycenter.tools.interfaces.TableRefresher;
 import com.mycompany.copycenter.tools.interfaces.TextWithBoxAndValue;
+import com.mycompany.copycenter.ui.models.BindMaterialToTypeModel;
 import java.awt.Frame;
 
 /**
@@ -115,12 +116,12 @@ public class NewValueDialog extends javax.swing.JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
         String value = newValueField.getText();
-        if(!model.validate(value)){
+        if(!model.validate(value) || !model.update((String) namesBox.getSelectedItem() + " " + value)){
             new WrongInput((Frame) parent, true).setVisible(true);
             return;
         }
-        model.update((String) namesBox.getSelectedItem() + " " + value);
-        parent.refreshTable();
+        if(!model.getClass().equals(BindMaterialToTypeModel.class))
+            parent.refreshTable();
         this.dispose();
     }//GEN-LAST:event_okButtonActionPerformed
 

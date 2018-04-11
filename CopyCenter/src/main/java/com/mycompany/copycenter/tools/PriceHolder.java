@@ -18,11 +18,23 @@ import java.util.Map;
  * @author max19
  */
 public class PriceHolder implements MapHolder{
-
+    
     @Override
     public void setMap(Map<String, Float> price) {
         Map<String, Float> priceList = getMap();
         priceList.putAll(price);
+        try(FileOutputStream fos =  new FileOutputStream("pricelist.bin")){
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(priceList);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+    }
+    
+    @Override
+    public void setMap(String key, Float price) {
+        Map<String, Float> priceList = getMap();
+        priceList.put(key, price);
         try(FileOutputStream fos =  new FileOutputStream("pricelist.bin")){
             ObjectOutputStream os = new ObjectOutputStream(fos);
             os.writeObject(priceList);

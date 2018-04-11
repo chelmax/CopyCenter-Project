@@ -7,8 +7,6 @@ package com.mycompany.copycenter.ui.models;
 
 import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  *
@@ -21,10 +19,7 @@ public class AddMaterialModel {
                 + "'" + name + "', "
                 + quantity + ", "
                 + cost + ")");
-        Map costMap = new HashMap();
-        costMap.put(name, 0);
-        CostsHolder ch = new CostsHolder();
-        ch.setMap(costMap);
+        new CostsHolder().setMap(name, 0f);
     }
     
 }

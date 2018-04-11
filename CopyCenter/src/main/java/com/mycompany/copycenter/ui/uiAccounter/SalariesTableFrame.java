@@ -62,7 +62,7 @@ public class SalariesTableFrame extends javax.swing.JFrame implements TableRefre
             }
         });
 
-        stuffTable.setModel(new SalariesTableViewModel(model.getStuff(), model.getColumnNames()));
+        stuffTable.setModel(new SalariesTableViewModel(model.getRows(), model.getColumnNames()));
         jScrollPane1.setViewportView(stuffTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -102,10 +102,11 @@ public class SalariesTableFrame extends javax.swing.JFrame implements TableRefre
         }
         model.payOff(salariesSum);
         refreshTable();
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new NewValueDialog(this, true, new ChangeRateModel(),model.getStuffNames()).setVisible(true);
+        new NewValueDialog(this, true, new ChangeRateModel(),model.getDialogBoxData()).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -120,6 +121,6 @@ public class SalariesTableFrame extends javax.swing.JFrame implements TableRefre
         SalariesTableViewModel tableModel = (SalariesTableViewModel) stuffTable.getModel();
         tableModel.changeModel();
         model.getDataFromDB();
-        stuffTable.setModel(new SalariesTableViewModel(model.getStuff(), model.getColumnNames()));
+        stuffTable.setModel(new SalariesTableViewModel(model.getRows(), model.getColumnNames()));
     }
 }

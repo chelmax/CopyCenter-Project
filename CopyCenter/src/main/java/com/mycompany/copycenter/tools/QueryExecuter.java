@@ -26,7 +26,7 @@ public class QueryExecuter {
             session.getTransaction().commit();
             return resultList;
         } catch (HibernateException he) {
-            he.printStackTrace();
+            System.err.println(he);
             return null;
         }
     }
@@ -40,7 +40,7 @@ public class QueryExecuter {
             session.getTransaction().commit();
             return resultList;
         } catch (HibernateException he) {
-            he.printStackTrace();
+            System.err.println(he);
             return null;
         }
     }
@@ -53,7 +53,7 @@ public class QueryExecuter {
             q.executeUpdate();
             session.getTransaction().commit();
         } catch (HibernateException he) {
-            he.printStackTrace();
+            System.err.println(he);
         }
     }
     
@@ -65,7 +65,7 @@ public class QueryExecuter {
             q.executeUpdate();
             session.getTransaction().commit();
         } catch (HibernateException he) {
-            he.printStackTrace();
+            System.err.println(he);
         }
     }
     

@@ -66,7 +66,7 @@
         <Component class="javax.swing.JTable" name="materialsTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new MaterialsTableViewModel(model.getMaterials(), model.getColumnNames())" type="code"/>
+              <Connection code="new MaterialsTableViewModel(model.getRows(), model.getColumnNames())" type="code"/>
             </Property>
           </Properties>
         </Component>

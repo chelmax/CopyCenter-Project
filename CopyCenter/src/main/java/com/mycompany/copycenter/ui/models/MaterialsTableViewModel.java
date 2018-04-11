@@ -5,6 +5,7 @@
  */
 package com.mycompany.copycenter.ui.models;
 
+import com.mycompany.copycenter.tools.interfaces.ChangeableModel;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
@@ -12,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author max19
  */
-public class MaterialsTableViewModel extends DefaultTableModel{
+public class MaterialsTableViewModel extends DefaultTableModel implements ChangeableModel{
     Class[] types = new Class [] {
         java.lang.String.class, 
         java.lang.Integer.class, 
@@ -37,6 +38,7 @@ public class MaterialsTableViewModel extends DefaultTableModel{
         super(data, columnNames);
     }
     
+    @Override
     public void changeModel() {
         fireTableDataChanged();
     }

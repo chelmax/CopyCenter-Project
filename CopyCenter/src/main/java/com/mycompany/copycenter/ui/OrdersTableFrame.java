@@ -16,7 +16,7 @@ import com.mycompany.copycenter.tools.interfaces.OrdersTableWithButtons;
  */
 public class OrdersTableFrame extends javax.swing.JFrame implements TableRefresher{
     
-    private OrdersTableWithButtons model;
+    private final OrdersTableWithButtons model;
     
     /**
      * Creates new form PayOrder
@@ -48,7 +48,7 @@ public class OrdersTableFrame extends javax.swing.JFrame implements TableRefresh
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        orderTable.setModel(new com.mycompany.copycenter.ui.models.OrdersTableViewModel(model.getOrders(), model.getColumnNames()));
+        orderTable.setModel(new com.mycompany.copycenter.ui.models.OrdersTableViewModel(model.getRows(), model.getColumnNames()));
         TableColumnModel tcm = orderTable.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(20);
         tcm.getColumn(2).setPreferredWidth(150);
@@ -93,14 +93,14 @@ public class OrdersTableFrame extends javax.swing.JFrame implements TableRefresh
         OrdersTableViewModel tableModel = (OrdersTableViewModel) orderTable.getModel();
         tableModel.changeModel();
         model.getDataFromDB();
-        orderTable.setModel(new OrdersTableViewModel(model.getOrders(), model.getColumnNames()));
+        orderTable.setModel(new OrdersTableViewModel(model.getRows(), model.getColumnNames()));
         TableColumnModel tcm = orderTable.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(20);
         tcm.getColumn(2).setPreferredWidth(150);
     }
     
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed
-        new TextWithBoxDialog(this, true, model.getModel(), model.getOrdersID())
+        new TextWithBoxDialog(this, true, model.getModel(), model.getDialogBoxData())
             .setVisible(true);
     }//GEN-LAST:event_jButtonActionPerformed
     

@@ -13,6 +13,8 @@ public class UpdateError extends javax.swing.JDialog {
 
     /**
      * Creates new form UpdateError
+     * @param parent
+     * @param modal
      */
     public UpdateError(java.awt.Frame parent, boolean modal) {
         super(parent, modal);

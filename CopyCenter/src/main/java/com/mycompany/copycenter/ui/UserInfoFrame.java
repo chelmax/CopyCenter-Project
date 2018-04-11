@@ -5,8 +5,10 @@
  */
 package com.mycompany.copycenter.ui;
 
+import com.mycompany.copycenter.entity.Orders;
 import com.mycompany.copycenter.entity.Users;
 import com.mycompany.copycenter.tools.CurrentUser;
+import java.util.Set;
 
 /**
  *
@@ -73,8 +75,11 @@ public class UserInfoFrame extends javax.swing.JFrame {
                 "\nPost - " + currentUser.getPost() +
                 "\nSalary - " + currentUser.getSalary();
         if(currentUser.getPost().equals("operator")){
+            int count = (int) currentUser.getOrderses().stream()
+                    .filter((o) -> (o.getOrderStatus().equals("Processed")))
+                    .count();
             userInfo += " +10% from processed orders" +
-                    "\nProcessed orders - " + currentUser.getOrderses().size();
+                    "\nProcessed orders - " + count;
         }  
         return userInfo;
     }
