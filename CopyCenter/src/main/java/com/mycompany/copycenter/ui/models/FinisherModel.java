@@ -9,10 +9,12 @@ import com.mycompany.copycenter.tools.interfaces.TextWithBox;
 import com.mycompany.copycenter.entity.Cost;
 import com.mycompany.copycenter.entity.Materials;
 import com.mycompany.copycenter.entity.Orders;
+import com.mycompany.copycenter.entity.Users;
 import com.mycompany.copycenter.tools.CostsHolder;
+import com.mycompany.copycenter.tools.CurrentUser;
 import com.mycompany.copycenter.tools.PriceHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
-import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -32,15 +34,14 @@ public class FinisherModel implements TextWithBox{
         Orders currentOrder = (Orders) QueryExecuter.executeGetterHQLQuery(
                 "from Orders o where o.id = " + id
         ).get(0);
-        List<Cost> currentCost = QueryExecuter.executeGetterHQLQuery("from Cost c "
+        Set<Cost> currentCost = currentOrder.getTypes().getCosts();
+                /*QueryExecuter.executeGetterHQLQuery("from Cost c "
                 + "where c.types.id = "
                 + "(from Orders o "
-                + "where o.id = " + id + ")"
-        );
+                + "where o.id = " + id + ")"*/
         for(Cost cost : currentCost){
-            List<Materials> materials = QueryExecuter.executeGetterHQLQuery("from Materials m "
-                + "where m.id = " + cost.getMaterials().getIdMaterials());
-            if(materials.get(0).getQuantity() < cost.getSizePerOne() * currentOrder.getSize()){
+            Materials material = cost.getMaterials();
+            if(material.getQuantity() < cost.getSizePerOne() * currentOrder.getSize()){
                 return false;
             }
         }
@@ -55,6 +56,9 @@ public class FinisherModel implements TextWithBox{
         CostsHolder ch = new CostsHolder();
         Float eleCost = ch.getElement("electricity") + new PriceHolder().getElement("electricity");
         ch.setMap("electricity", eleCost);
+        CurrentUser.setCurrentUser((Users)QueryExecuter.executeGetterHQLQuery(
+                "from Users u where u.id = " + CurrentUser.getCurrentUser().getIdUser()
+        ).get(0));
         return true;
     }
     

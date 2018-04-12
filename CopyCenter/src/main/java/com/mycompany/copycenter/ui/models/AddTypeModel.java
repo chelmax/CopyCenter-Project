@@ -20,11 +20,10 @@ import java.util.Map;
  */
 public class AddTypeModel {
     
-    private  List<Materials> notAddedMaterials;
-    private List<Materials> addedMaterials;
-    private Map<String, Integer> addedMaterialsSizeMap;
+    private final  List<Materials> notAddedMaterials;
+    private final List<Materials> addedMaterials;
+    private final Map<String, Integer> addedMaterialsSizeMap;
 
-    
     public AddTypeModel(){
         addedMaterials = new ArrayList<>();
         addedMaterialsSizeMap = new HashMap<>();
@@ -52,7 +51,6 @@ public class AddTypeModel {
             }
         }
     }
-    
     
     public Map<String, Integer> getAddedMaterialsSizeMap() {
         return addedMaterialsSizeMap;
@@ -94,7 +92,7 @@ public class AddTypeModel {
         return addedMaterialsNames.toArray(new String[addedMaterialsNames.size()]);
     }
     
-    public void addType(String name, Float price){                              //сложный метод, нуждающийся в дебаге
+    public void addType(String name, Float price){                              
         QueryExecuter.executeSQLQuery(
                 "Insert into Types (name) values ('" 
                 + name + "')"

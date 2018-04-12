@@ -16,7 +16,7 @@ import java.util.Map;
  *
  * @author max19
  */
-public class TypeRemoverModel implements TextWithBox{                           //не дебажилось
+public class TypeRemoverModel implements TextWithBox{                           
 
     private final String infoText = "The name of the type to delete is";
     
@@ -33,6 +33,9 @@ public class TypeRemoverModel implements TextWithBox{                           
         Integer id = deletedType.get(0).getIdType();
         QueryExecuter.executeSQLQuery("Delete from Cost "
                 + "where Type_idType = " + id
+        );
+        QueryExecuter.executeSQLQuery("Delete from Orders "
+                + "where idType = " + id
         );
         QueryExecuter.executeSQLQuery("Delete from Types "
                 + "where idType = " + id

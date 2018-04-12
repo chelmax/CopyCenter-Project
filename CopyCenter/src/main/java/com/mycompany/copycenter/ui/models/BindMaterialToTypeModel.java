@@ -45,16 +45,6 @@ public class BindMaterialToTypeModel implements TextWithBoxAndValue{
         parent.getModel().addMaterial(arr[0], Integer.parseInt(arr[1]));
         parent.refreshMaterialsArea();
         return true;
-        /*String[] arr = nameCost.split(" ");
-        if(arr.length > 1){
-            String info = "Needed " + arr[1] + " pieces of " + arr[0] + "\n";
-            parent.refreshMaterialsArea(info);
-            parent.getModel().addMaterial(arr[0], Integer.parseInt(arr[1]));
-            return true;
-        } else{
-            parent.getModel().deleteMaterial(arr[0]);                           //как удалять из ТекстАреа?
-            return true;
-        }*/
     }                                     
 
     
