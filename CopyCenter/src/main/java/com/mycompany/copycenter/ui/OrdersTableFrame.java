@@ -5,10 +5,12 @@
  */
 package com.mycompany.copycenter.ui;
 
+import com.mycompany.copycenter.tools.interfaces.MessangerMenu;
 import com.mycompany.copycenter.ui.models.OrdersTableViewModel;
 import javax.swing.table.TableColumnModel;
 import com.mycompany.copycenter.tools.interfaces.TableRefresher;
 import com.mycompany.copycenter.tools.interfaces.OrdersTableWithButtons;
+import java.awt.Frame;
 
 /**
  *
@@ -17,12 +19,15 @@ import com.mycompany.copycenter.tools.interfaces.OrdersTableWithButtons;
 public class OrdersTableFrame extends javax.swing.JFrame implements TableRefresher{
     
     private final OrdersTableWithButtons model;
+    private final MessangerMenu callerMenu;
     
     /**
      * Creates new form PayOrder
+     * @param callerMenu
      * @param model
      */
-    public OrdersTableFrame(OrdersTableWithButtons model) {
+    public OrdersTableFrame(MessangerMenu callerMenu, OrdersTableWithButtons model) {
+        this.callerMenu = callerMenu;
         this.model = model;
         init();
     }
@@ -97,6 +102,7 @@ public class OrdersTableFrame extends javax.swing.JFrame implements TableRefresh
         TableColumnModel tcm = orderTable.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(20);
         tcm.getColumn(2).setPreferredWidth(150);
+        callerMenu.updateMsgArea();
     }
     
     private void jButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActionPerformed

@@ -5,6 +5,8 @@
  */
 package com.mycompany.copycenter.ui.uiAccounter;
 
+import com.mycompany.copycenter.tools.Messanger;
+import com.mycompany.copycenter.tools.interfaces.MessangerMenu;
 import com.mycompany.copycenter.ui.UserInfoFrame;
 import com.mycompany.copycenter.ui.models.OrderLogModel;
 
@@ -12,7 +14,7 @@ import com.mycompany.copycenter.ui.models.OrderLogModel;
  *
  * @author max19
  */
-public class AccountantMenu extends javax.swing.JFrame {
+public class AccountantMenu extends javax.swing.JFrame implements MessangerMenu{
 
     /**
      * Creates new form AccounterMenu
@@ -37,9 +39,16 @@ public class AccountantMenu extends javax.swing.JFrame {
         typesLabel = new javax.swing.JButton();
         logButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        msgArea = new javax.swing.JTextArea();
+        refreshMsgButton = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+        });
 
         salariesButton.setText("Account salaries");
         salariesButton.addActionListener(new java.awt.event.ActionListener() {
@@ -83,9 +92,25 @@ public class AccountantMenu extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        msgArea.setColumns(20);
+        msgArea.setRows(5);
+        jScrollPane1.setViewportView(msgArea);
+        Messanger msg  = new Messanger("accountant");
+        msgArea.setText(msg.getMsgText());
+
+        refreshMsgButton.setText("Refresh messages");
+        refreshMsgButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshMsgButtonActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Clear messages");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,8 +125,10 @@ public class AccountantMenu extends javax.swing.JFrame {
                     .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(typesLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                .addContainerGap(63, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshMsgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,9 +145,13 @@ public class AccountantMenu extends javax.swing.JFrame {
                 .addComponent(materialsButton)
                 .addGap(48, 48, 48)
                 .addComponent(costsButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(24, 24, 24))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshMsgButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton2)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         pack();
@@ -150,13 +181,34 @@ public class AccountantMenu extends javax.swing.JFrame {
         new  TableFrame(new OrderLogModel()).setVisible(true);
     }//GEN-LAST:event_logButtonActionPerformed
 
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+       Messanger.clearMsgMap();
+    }//GEN-LAST:event_formWindowClosed
+
+    private void refreshMsgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshMsgButtonActionPerformed
+        this.updateMsgArea();
+    }//GEN-LAST:event_refreshMsgButtonActionPerformed
+    
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Messanger.clearMsgMap();
+        this.updateMsgArea();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    @Override
+    public void updateMsgArea(){
+        Messanger msg  = new Messanger("accountant");
+        msgArea.setText(msg.getMsgText());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton costsButton;
+    private javax.swing.JButton jButton2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JButton logButton;
     private javax.swing.JButton materialsButton;
+    private javax.swing.JTextArea msgArea;
     private javax.swing.JButton profileButton;
+    private javax.swing.JButton refreshMsgButton;
     private javax.swing.JButton salariesButton;
     private javax.swing.JButton typesLabel;
     // End of variables declaration//GEN-END:variables

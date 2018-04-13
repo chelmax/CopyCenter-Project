@@ -167,7 +167,7 @@ public class OrderCreatorFrame extends javax.swing.JFrame {
                     (String) typesBox.getSelectedItem(),
                     sizeField.getText()
             );
-            priceField.setText(String.format("%.2f", price));
+            priceField.setText(String.format("%.2f", price).replace(",", "."));
         }catch(Exception ex){
             new WrongInput(this, true).setVisible(true);
         }

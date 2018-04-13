@@ -5,6 +5,8 @@
  */
 package com.mycompany.copycenter.ui.uiManager;
 
+import com.mycompany.copycenter.tools.Messanger;
+import com.mycompany.copycenter.tools.interfaces.MessangerMenu;
 import com.mycompany.copycenter.ui.models.OrderPaymentModel;
 import com.mycompany.copycenter.ui.OrdersTableFrame;
 import com.mycompany.copycenter.ui.UserInfoFrame;
@@ -13,7 +15,7 @@ import com.mycompany.copycenter.ui.UserInfoFrame;
  *
  * @author max19
  */
-public class ManagerMenu extends javax.swing.JFrame {
+public class ManagerMenu extends javax.swing.JFrame implements MessangerMenu{
 
     /**
      * Creates new form ManagerMenu
@@ -35,7 +37,8 @@ public class ManagerMenu extends javax.swing.JFrame {
         createOrderButton = new javax.swing.JButton();
         payOrderButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        msgArea = new javax.swing.JTextArea();
+        refreshMsgButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,9 +63,18 @@ public class ManagerMenu extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        msgArea.setColumns(20);
+        msgArea.setRows(5);
+        jScrollPane1.setViewportView(msgArea);
+        Messanger msg  = new Messanger("manager");
+        msgArea.setText(msg.getMsgText());
+
+        refreshMsgButton.setText("Refresh messages");
+        refreshMsgButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshMsgButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,7 +86,8 @@ public class ManagerMenu extends javax.swing.JFrame {
                     .addComponent(createOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(payOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(refreshMsgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -88,7 +101,9 @@ public class ManagerMenu extends javax.swing.JFrame {
                 .addComponent(payOrderButton)
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(refreshMsgButton)
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -103,15 +118,25 @@ public class ManagerMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void payOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payOrderButtonActionPerformed
-        new OrdersTableFrame(new OrderPaymentModel()).setVisible(true);
+        new OrdersTableFrame(this, new OrderPaymentModel()).setVisible(true);
     }//GEN-LAST:event_payOrderButtonActionPerformed
 
+    private void refreshMsgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshMsgButtonActionPerformed
+        this.updateMsgArea();
+    }//GEN-LAST:event_refreshMsgButtonActionPerformed
+    
+    @Override
+    public void updateMsgArea(){
+        Messanger msg  = new Messanger("manager");
+        msgArea.setText(msg.getMsgText());
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton createOrderButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea msgArea;
     private javax.swing.JButton payOrderButton;
     private javax.swing.JButton profileButton;
+    private javax.swing.JButton refreshMsgButton;
     // End of variables declaration//GEN-END:variables
 }

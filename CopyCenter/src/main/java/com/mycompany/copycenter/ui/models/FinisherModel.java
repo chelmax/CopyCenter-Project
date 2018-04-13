@@ -12,6 +12,7 @@ import com.mycompany.copycenter.entity.Orders;
 import com.mycompany.copycenter.entity.Users;
 import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.tools.CurrentUser;
+import com.mycompany.copycenter.tools.Messanger;
 import com.mycompany.copycenter.tools.PriceHolder;
 import com.mycompany.copycenter.tools.QueryExecuter;
 import java.util.Set;
@@ -35,16 +36,20 @@ public class FinisherModel implements TextWithBox{
                 "from Orders o where o.id = " + id
         ).get(0);
         Set<Cost> currentCost = currentOrder.getTypes().getCosts();
-                /*QueryExecuter.executeGetterHQLQuery("from Cost c "
-                + "where c.types.id = "
-                + "(from Orders o "
-                + "where o.id = " + id + ")"*/
+        boolean flag = false;
         for(Cost cost : currentCost){
             Materials material = cost.getMaterials();
-            if(material.getQuantity() < cost.getSizePerOne() * currentOrder.getSize()){
-                return false;
+            int finalCost = cost.getSizePerOne() * currentOrder.getSize();
+            if(material.getQuantity() < finalCost){
+                Messanger.createMaterialsMsg(
+                        material.getName() + " (order #" + id + ")",
+                        (finalCost - material.getQuantity())
+                );
+                flag = true;
             }
         }
+        if(flag)
+            return false;
         currentCost.forEach((cost) -> {                                           
             QueryExecuter.executeSQLQuery("UPDATE Materials "
                     + "set quantity = quantity - " + cost.getSizePerOne() * currentOrder.getSize() + " "
@@ -54,7 +59,8 @@ public class FinisherModel implements TextWithBox{
                 + "set orderStatus = 'Processed' "
                 + "where idOrder = " + id);
         CostsHolder ch = new CostsHolder();
-        Float eleCost = ch.getElement("electricity") + new PriceHolder().getElement("electricity");
+        Float eleCost = ch.getElement("electricity") 
+                + new PriceHolder().getElement("electricity") * currentOrder.getSize();
         ch.setMap("electricity", eleCost);
         CurrentUser.setCurrentUser((Users)QueryExecuter.executeGetterHQLQuery(
                 "from Users u where u.id = " + CurrentUser.getCurrentUser().getIdUser()

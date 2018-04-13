@@ -10,6 +10,9 @@ import com.mycompany.copycenter.ui.models.ChangeCostModel;
 import com.mycompany.copycenter.ui.models.MaterialsTableModel;
 import com.mycompany.copycenter.ui.models.MaterialsTableViewModel;
 import com.mycompany.copycenter.ui.models.OrderMaterialModel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -108,11 +111,15 @@ public class MaterialsTableFrame extends javax.swing.JFrame implements TableRefr
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        new NewValueDialog(this, true, new OrderMaterialModel(),model.getDialogBoxData()).setVisible(true);
+        new NewValueDialog(this, true, new OrderMaterialModel(), model.getDialogBoxData()).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new NewValueDialog(this, true, new ChangeCostModel(),model.getDialogBoxData()).setVisible(true);
+        List<String> dataList = new ArrayList<>();
+        dataList.addAll(Arrays.asList(model.getDialogBoxData()));
+        dataList.add("electricity");
+        dataList.add("lease");
+        new NewValueDialog(this, true, new ChangeCostModel(), dataList.toArray(new String[dataList.size()])).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

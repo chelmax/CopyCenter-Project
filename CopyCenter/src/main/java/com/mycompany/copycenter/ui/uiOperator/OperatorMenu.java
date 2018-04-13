@@ -5,6 +5,8 @@
  */
 package com.mycompany.copycenter.ui.uiOperator;
 
+import com.mycompany.copycenter.tools.Messanger;
+import com.mycompany.copycenter.tools.interfaces.MessangerMenu;
 import com.mycompany.copycenter.ui.models.OrderFinisherModel;
 import com.mycompany.copycenter.ui.models.OrderGettingModel;
 import com.mycompany.copycenter.ui.OrdersTableFrame;
@@ -14,7 +16,7 @@ import com.mycompany.copycenter.ui.UserInfoFrame;
  *
  * @author max19
  */
-public class OperatorMenu extends javax.swing.JFrame {
+public class OperatorMenu extends javax.swing.JFrame implements MessangerMenu{
 
     /**
      * Creates new form OperatorMenu
@@ -36,7 +38,8 @@ public class OperatorMenu extends javax.swing.JFrame {
         getOrderButton = new javax.swing.JButton();
         orderFinisherButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        msgArea = new javax.swing.JTextArea();
+        refreshMsgButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,9 +64,18 @@ public class OperatorMenu extends javax.swing.JFrame {
             }
         });
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        msgArea.setColumns(20);
+        msgArea.setRows(5);
+        jScrollPane1.setViewportView(msgArea);
+        Messanger msg  = new Messanger("operator");
+        msgArea.setText(msg.getMsgText());
+
+        refreshMsgButton.setText("Refresh messages");
+        refreshMsgButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshMsgButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -75,7 +87,8 @@ public class OperatorMenu extends javax.swing.JFrame {
                     .addComponent(getOrderButton, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                     .addComponent(profileButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(orderFinisherButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
+                    .addComponent(refreshMsgButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -89,7 +102,9 @@ public class OperatorMenu extends javax.swing.JFrame {
                 .addComponent(orderFinisherButton)
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshMsgButton)
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,19 +115,29 @@ public class OperatorMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_profileButtonActionPerformed
 
     private void getOrderButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_getOrderButtonActionPerformed
-        new OrdersTableFrame(new OrderGettingModel()).setVisible(true);
+        new OrdersTableFrame(this, new OrderGettingModel()).setVisible(true);
     }//GEN-LAST:event_getOrderButtonActionPerformed
 
     private void orderFinisherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderFinisherButtonActionPerformed
-        new OrdersTableFrame(new OrderFinisherModel()).setVisible(true);
+        new OrdersTableFrame(this, new OrderFinisherModel()).setVisible(true);
     }//GEN-LAST:event_orderFinisherButtonActionPerformed
 
+    private void refreshMsgButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshMsgButtonActionPerformed
+        this.updateMsgArea();
+    }//GEN-LAST:event_refreshMsgButtonActionPerformed
 
+    @Override
+    public void updateMsgArea(){
+        Messanger msg  = new Messanger("operator");
+        msgArea.setText(msg.getMsgText());
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton getOrderButton;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea msgArea;
     private javax.swing.JButton orderFinisherButton;
     private javax.swing.JButton profileButton;
+    private javax.swing.JButton refreshMsgButton;
     // End of variables declaration//GEN-END:variables
 }
