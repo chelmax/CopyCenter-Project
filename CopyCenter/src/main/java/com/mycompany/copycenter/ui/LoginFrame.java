@@ -7,10 +7,12 @@ package com.mycompany.copycenter.ui;
 
 import com.mycompany.copycenter.ui.uiManager.ManagerMenu;
 import com.mycompany.copycenter.ex.ui.WrongInput;
+import com.mycompany.copycenter.tools.CostsHolder;
 import com.mycompany.copycenter.ui.models.Authorization;
 import com.mycompany.copycenter.tools.CurrentUser;
 import com.mycompany.copycenter.ui.uiAccounter.AccountantMenu;
 import com.mycompany.copycenter.ui.uiOperator.OperatorMenu;
+import java.io.File;
 
 /**
  *
@@ -179,7 +181,11 @@ public class LoginFrame extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
-
+        
+        File f =  new File("currentcosts.bin");
+        if(!f.exists())
+            CostsHolder.create();
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override

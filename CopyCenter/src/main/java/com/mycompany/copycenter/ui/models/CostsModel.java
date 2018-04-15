@@ -16,6 +16,8 @@ import java.util.Map;
 public class CostsModel {
     
     public String getEleCost(){
+        CostsHolder ch = new CostsHolder();
+        Map test = ch.getMap();
         return String.format("%.2f", new CostsHolder().getElement("electricity"));
     }
     

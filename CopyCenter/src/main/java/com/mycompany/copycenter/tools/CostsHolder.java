@@ -60,4 +60,17 @@ public class CostsHolder implements MapHolder{
         return getMap().get(type);
     }
     
+    public static void create(){
+        Map<String, Float> defaultCosts =  new HashMap<>();
+        defaultCosts.put("lease", 0f);
+        defaultCosts.put("electricity", 0f);
+        defaultCosts.put("salaries", 0f);
+        try(FileOutputStream fos =  new FileOutputStream("currentcosts.bin")){
+            ObjectOutputStream os = new ObjectOutputStream(fos);
+            os.writeObject(defaultCosts);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+    }
+    
 }
