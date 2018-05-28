@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author max19
  */
-public class Messanger {                                                        //дебажить
+public class Messanger {                                                        
     
     private String msgText;
 

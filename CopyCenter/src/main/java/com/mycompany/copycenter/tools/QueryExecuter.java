@@ -5,7 +5,7 @@
  */
 package com.mycompany.copycenter.tools;
 
-import com.mycompany.copycenter.util.NewHibernateUtil;
+import com.mycompany.copycenter.util.HibernateUtil;
 import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
@@ -19,7 +19,7 @@ public class QueryExecuter {
     
     public static List executeGetterHQLQuery(String hql) {
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Query q = session.createQuery(hql);
             List resultList = q.list();
@@ -33,7 +33,7 @@ public class QueryExecuter {
     
     public static List executeGetterSQLQuery(String sql) {
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Query q = session.createSQLQuery(sql);
             List resultList = q.list();
@@ -47,7 +47,7 @@ public class QueryExecuter {
     
     public static void executeHQLQuery(String hql) {
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Query q = session.createQuery(hql);
             q.executeUpdate();
@@ -59,7 +59,7 @@ public class QueryExecuter {
     
     public static void executeSQLQuery(String sql) {
         try {
-            Session session = NewHibernateUtil.getSessionFactory().openSession();
+            Session session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             Query q = session.createSQLQuery(sql);
             q.executeUpdate();
